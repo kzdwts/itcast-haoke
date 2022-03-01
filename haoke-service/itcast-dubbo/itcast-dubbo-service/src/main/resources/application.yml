@@ -1,0 +1,21 @@
+# Spring boot application
+server:
+  port: 9090
+spring:
+  application:
+    name: itcast-dubbo-service
+# dubbo
+dubbo:
+  service:
+    version: 1.0.0
+  scan:
+    base-packages: cn.itcast.dubbo.service
+  application:
+    name: dubbo-provider-demo # dubbo应用名称
+  protocol:
+    name: dubbo
+    port: 20880
+# zk注册中心
+  registry:
+    address: zookeeper://192.168.100.133:2181
+    client: zkclient
