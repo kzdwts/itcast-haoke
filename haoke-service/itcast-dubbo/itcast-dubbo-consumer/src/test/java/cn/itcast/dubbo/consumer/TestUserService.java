@@ -21,12 +21,22 @@ import java.util.List;
 @SpringBootTest
 public class TestUserService {
 
-    @Reference(version = "1.0.0")
+    @Reference(version = "1.0.0", loadbalance = "roundrobin")
     private UserService userService;
 
     @Test
     public void testQueryAll() {
-        List<User> userList = this.userService.queryAll();
-        userList.forEach(System.out::println);
+
+        for (int i = 0; i < 50; i++) {
+            List<User> userList = this.userService.queryAll();
+            userList.forEach(System.out::println);
+
+            try {
+                Thread.sleep(1000L);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+
     }
 }
