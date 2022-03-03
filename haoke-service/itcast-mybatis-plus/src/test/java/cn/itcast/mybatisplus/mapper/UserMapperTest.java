@@ -3,6 +3,7 @@ package cn.itcast.mybatisplus.mapper;
 
 import cn.itcast.mybatisplus.pojo.User;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -74,6 +75,26 @@ public class UserMapperTest {
         user.setName("lisi");
         int row = this.userMapper.updateById(user);
         System.out.println("更新数据，row=" + row);
+    }
+
+    /**
+     * 功能: 分页查询
+     *
+     * @author Kang Yong
+     * @date 2022/3/3
+     */
+    @Test
+    public void testSelectPage() {
+        // 分页
+        Page<User> page = new Page<>(1, 3);
+        // 查询
+        Page<User> userPage = this.userMapper.selectPage(page, null);
+        System.out.println("总条数：" + userPage.getTotal());
+        System.out.println("当前页数：" + userPage.getCurrent());
+        System.out.println("当前每页显示数：" + userPage.getSize());
+
+        List<User> userList = userPage.getRecords();
+        userList.forEach(System.out::println);
     }
 
 }

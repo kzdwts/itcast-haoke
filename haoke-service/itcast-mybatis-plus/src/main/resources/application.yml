@@ -6,3 +6,7 @@ spring:
     url: jdbc://192.168.100.132:3306/haoke?useSSL=false&serverTimezone=GMT%2B8&characterEncoding=utf-8
     username: root
     password: 1024KangYong@MySQL
+# mybatis-plus配置
+mybatis-plus:
+  config-location: classpath:mybatis-config.xml # 指定全局配置文件
+  mapper-locations: classpath*:mybatis/*.xml
