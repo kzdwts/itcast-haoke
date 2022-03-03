@@ -1,7 +1,11 @@
 package cn.itcast.mybatisplus.pojo;
 
+import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableId;
 import lombok.Data;
 import lombok.ToString;
+
+import java.io.Serializable;
 
 /**
  * 用户
@@ -12,5 +16,12 @@ import lombok.ToString;
  */
 @Data
 @ToString
-public class User {
+public class User implements Serializable {
+
+    @TableId(value = "id", type = IdType.AUTO)
+    private Long id;
+    private String name;
+    private Integer age;
+    private String email;
+
 }
