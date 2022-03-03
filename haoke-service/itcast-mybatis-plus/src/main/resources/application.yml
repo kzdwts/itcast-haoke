@@ -1,0 +1,8 @@
+spring:
+  application:
+    name: itcast-mybatis-plus
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc://192.168.100.132:3306/haoke?
+    username: root
+    password: 1024KangYong@MySQL
