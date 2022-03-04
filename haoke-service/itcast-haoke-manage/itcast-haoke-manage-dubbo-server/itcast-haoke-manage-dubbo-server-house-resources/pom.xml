@@ -12,7 +12,7 @@
     <artifactId>itcast-haoke-manage-dubbo-server-house-resources</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>itcast-haoke-manage-dubbo-server-house-resources</module>
+        <module>itcast-haoke-manage-dubbo-server-house-resources-dubbo-interface</module>
         <module>itcast-haoke-manage-dubbo-server-house-resources-dubbo-service</module>
     </modules>
 
