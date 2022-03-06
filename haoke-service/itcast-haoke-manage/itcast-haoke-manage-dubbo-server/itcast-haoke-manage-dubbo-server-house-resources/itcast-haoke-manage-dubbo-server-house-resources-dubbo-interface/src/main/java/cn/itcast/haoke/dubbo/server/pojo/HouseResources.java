@@ -134,9 +134,4 @@ public class HouseResources extends BasePojo {
      */
     private String propertyCost;
 
-    private LocalDateTime created;
-
-    private LocalDateTime updated;
-
-
 }
