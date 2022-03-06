@@ -1,0 +1,11 @@
+server:
+  port: 9091
+spring:
+  application:
+    name: itcast-dubbo-consumer
+dubbo:
+  application:
+    name: dubbo-consumer-demo
+  registry:
+    address: zookeeper://192.168.100.134:2181
+    client: zkclient

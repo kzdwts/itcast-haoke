@@ -32,7 +32,7 @@ public class TestUserService {
             userList.forEach(System.out::println);
 
             try {
-                Thread.sleep(1000L);
+                Thread.sleep(100L);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
