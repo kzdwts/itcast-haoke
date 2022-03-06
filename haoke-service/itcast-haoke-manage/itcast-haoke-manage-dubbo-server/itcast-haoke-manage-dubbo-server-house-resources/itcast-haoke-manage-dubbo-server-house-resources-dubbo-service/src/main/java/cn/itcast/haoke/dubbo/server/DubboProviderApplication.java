@@ -12,7 +12,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * @date 2022/3/6
  * @since 1.0.0
  */
-@EnableDubbo
+@EnableDubbo // 解决yml配置文件不起作用问题
 @SpringBootApplication
 public class DubboProviderApplication {
 
