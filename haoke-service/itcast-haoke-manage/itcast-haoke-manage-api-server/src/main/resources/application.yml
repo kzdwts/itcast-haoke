@@ -1,0 +1,14 @@
+# spring boot 基础配置
+server:
+  port: 18080
+spring:
+  application:
+    name: itcast-haoke-manage-api-server
+
+# dubbo 配置
+dubbo:
+  application:
+    name: dubbo-consumer-haoke-manage # 应用名称
+  registry: # zk注册中心
+    address: zookeeper://192.168.100.134:2181
+    client: zkclient
