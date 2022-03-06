@@ -1,5 +1,6 @@
 package cn.itcast.haoke.dubbo.server;
 
+import com.alibaba.dubbo.config.spring.context.annotation.EnableDubbo;
 import org.springframework.boot.WebApplicationType;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
@@ -11,6 +12,7 @@ import org.springframework.boot.builder.SpringApplicationBuilder;
  * @date 2022/3/6
  * @since 1.0.0
  */
+@EnableDubbo
 @SpringBootApplication
 public class DubboProviderApplication {
 
