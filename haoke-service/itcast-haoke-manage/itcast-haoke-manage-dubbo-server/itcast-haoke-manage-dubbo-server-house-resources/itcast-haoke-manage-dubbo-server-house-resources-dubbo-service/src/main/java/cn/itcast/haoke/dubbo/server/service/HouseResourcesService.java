@@ -1,15 +1,16 @@
-package cn.itcast.haoke.dubbo.server.api;
+package cn.itcast.haoke.dubbo.server.service;
 
 import cn.itcast.haoke.dubbo.server.pojo.HouseResources;
+import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
- * 房源信息 业务接口层 gegnxin
+ * 房源表，业务接口
  *
  * @author Kang Yong
- * @date 2022/3/5
+ * @date 2022/3/6
  * @since 1.0.0
  */
-public interface ApiHouseResourcesService {
+public interface HouseResourcesService extends IService<HouseResources> {
 
     /**
      * 保存房源信息
