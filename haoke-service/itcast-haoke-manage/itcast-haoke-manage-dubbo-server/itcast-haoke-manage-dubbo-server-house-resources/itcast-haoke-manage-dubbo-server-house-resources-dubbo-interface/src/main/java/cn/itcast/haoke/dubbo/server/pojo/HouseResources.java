@@ -62,12 +62,12 @@ public class HouseResources extends BasePojo {
     /**
      * 租赁方式，1-整租，2-合租
      */
-    private Boolean rentMethod;
+    private Integer rentMethod;
 
     /**
      * 支付方式，1-付一押一，2-付三押一，3-付六押一，4-年付押一，5-其它
      */
-    private Boolean paymentMethod;
+    private Integer paymentMethod;
 
     /**
      * 户型，如：2室1厅1卫
@@ -97,7 +97,7 @@ public class HouseResources extends BasePojo {
     /**
      * 装修，1-精装，2-简装，3-毛坯
      */
-    private Boolean decoration;
+    private Integer decoration;
 
     /**
      * 配套设施， 如：1,2,3
@@ -127,7 +127,7 @@ public class HouseResources extends BasePojo {
     /**
      * 看房时间，1-上午，2-中午，3-下午，4-晚上，5-全天
      */
-    private Boolean time;
+    private Integer time;
 
     /**
      * 物业费
