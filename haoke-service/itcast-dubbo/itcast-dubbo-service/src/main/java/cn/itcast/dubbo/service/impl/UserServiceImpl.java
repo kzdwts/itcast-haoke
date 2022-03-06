@@ -14,7 +14,7 @@ import java.util.List;
  * @date 2022/3/1
  * @since 1.0.0
  */
-@Service(version = "${dubbo.service.version}") // 声明这是一个dubbo服务
+@Service(version = "1.0.0") // 声明这是一个dubbo服务
 public class UserServiceImpl implements UserService {
 
     /**

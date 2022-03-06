@@ -1,0 +1,22 @@
+# spring 配置
+server:
+  port: ${PORT:9090}
+spring:
+  application:
+    name: itcast-dubbo-service
+# dubbo 配置
+dubbo:
+  service:
+    version: 1.0.0
+  application:
+    name: dubbo-provider-demo
+  scan:
+    base-packages: cn.itcast.dubbo.service
+  protocol:
+    name: dubbo
+    port: 20882
+  registry:
+    address: zookeeper://192.168.100.134:2181
+    client: zkclient
+
+
