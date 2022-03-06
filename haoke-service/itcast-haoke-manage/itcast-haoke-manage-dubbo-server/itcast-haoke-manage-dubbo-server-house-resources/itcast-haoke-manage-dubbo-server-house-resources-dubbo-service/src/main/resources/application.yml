@@ -20,3 +20,15 @@ dubbo:
   registry: # zk注册中心
     address: zookeeper://192.168.100.134:2181
     client: zkclient
+# ====================MybatisPlus====================
+mybatis-plus:
+  mapper-locations: mapper/*.xml
+  type-aliases-package: cn.itcast.haoke.dubbo.*.pojo
+  configuration:
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+
+#日志配置
+#logging:
+#  pattern:
+#    console: "%msg%n" 这种配置是日志只打印内容，不打印前边的时间和类

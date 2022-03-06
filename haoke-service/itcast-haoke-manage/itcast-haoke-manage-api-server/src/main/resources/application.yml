@@ -12,3 +12,7 @@ dubbo:
   registry: # zk注册中心
     address: zookeeper://192.168.100.134:2181
     client: zkclient
+# 日志级别
+logging:
+  level:
+    root: DEBUG
