@@ -16,3 +16,11 @@ dubbo:
 logging:
   level:
     root: DEBUG
+
+# 阿里云 oss参数配置
+aliyun:
+  endpoint: oss-cn-qingdao.aliyuncs.com
+  accessKeyId: LTAIfC7fUsPj7Rfq
+  accessKeySecret: c2Vo3q1AmivtY8lxFnfsCfkO2c2HCkaliyun
+  bucketName: itcast-haoke
+  urlPrefix: http://itcast-haoke.oss-cn-qingdao.aliyuncs.com/
