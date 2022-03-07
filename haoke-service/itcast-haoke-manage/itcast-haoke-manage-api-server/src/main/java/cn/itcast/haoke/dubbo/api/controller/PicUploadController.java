@@ -1,5 +1,6 @@
 package cn.itcast.haoke.dubbo.api.controller;
 
+import cn.itcast.haoke.dubbo.api.service.PicUploadFileSystemService;
 import cn.itcast.haoke.dubbo.api.service.PicUploadService;
 import cn.itcast.haoke.dubbo.api.vo.PicUploadResult;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,8 +21,11 @@ import org.springframework.web.multipart.MultipartFile;
 @RequestMapping("/pic/upload")
 public class PicUploadController {
 
+//    @Autowired
+//    private PicUploadService picUploadService;
+
     @Autowired
-    private PicUploadService picUploadService;
+    private PicUploadFileSystemService picUploadFileSystemService;
 
     /**
      * 文件上传
@@ -33,6 +37,7 @@ public class PicUploadController {
      */
     @PostMapping
     public PicUploadResult upload(@RequestParam("file") MultipartFile uploadFile) {
-        return this.picUploadService.upload(uploadFile);
+//        return this.picUploadService.upload(uploadFile);
+        return this.picUploadFileSystemService.upload(uploadFile);
     }
 }
