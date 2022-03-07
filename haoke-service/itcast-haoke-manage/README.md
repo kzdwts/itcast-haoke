@@ -17,6 +17,12 @@
 
 ### 2.1、服务端技术
 
+* 阿里云OSS文件存储
+* [MyBatis-Plus](https://baomidou.com/) 魂斗罗 MyBatis好兄弟
+* [percona v5.7.23](https://www.percona.com/software/mysql-database) MySQL升级版
+  * Percona为MySQL数据库服务器进行了改进，在功能和性能上较MySQL有着很显著的提升
+  * 该版本提升了在高负载情况下的InnoDB的性能，为DBA提供一些非常有用的性能诊断工具
+
 ### 2.2、前端技术
 
 * [ReactJS](https://reactjs.org/) 一个用于构建用户界面的JavaScript框架
