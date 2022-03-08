@@ -1,7 +1,10 @@
 package cn.itcast.haoke.dubbo.api.service;
 
+import cn.itcast.haoke.dubbo.api.vo.Pagination;
+import cn.itcast.haoke.dubbo.api.vo.TableResult;
 import cn.itcast.haoke.dubbo.server.api.ApiHouseResourcesService;
 import cn.itcast.haoke.dubbo.server.pojo.HouseResources;
+import cn.itcast.haoke.dubbo.server.vo.PageInfo;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Service;
 
@@ -31,4 +34,20 @@ public class HouseResourcesService {
         return result == 1;
     }
 
+    /**
+     * 分页查询房源列表
+     *
+     * @param queryCondition {@link HouseResources}
+     * @param currentPage    {@link Integer}
+     * @param pageSize       {@link Integer}
+     * @return {@link TableResult}
+     * @author Kang Yong
+     * @date 2022/3/8
+     */
+    public TableResult queryList(HouseResources queryCondition, Integer currentPage, Integer pageSize) {
+        // 调用查询服务
+        PageInfo<HouseResources> pageInfo = this.apiHouseResourcesService.queryHouseResourcesList(currentPage, pageSize, queryCondition);
+        // 返回分页数据
+        return new TableResult(pageInfo.getRecords(), new Pagination(currentPage, pageSize, pageInfo.getTotal()));
+    }
 }

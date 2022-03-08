@@ -1,6 +1,7 @@
 package cn.itcast.haoke.dubbo.api.controller;
 
 import cn.itcast.haoke.dubbo.api.service.HouseResourcesService;
+import cn.itcast.haoke.dubbo.api.vo.TableResult;
 import cn.itcast.haoke.dubbo.server.pojo.HouseResources;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -39,14 +40,31 @@ public class HouseResourcesContrlller {
     }
 
     /**
-     * 测试接口
+     * 分页查询房源列表
      *
-     * @return {@link ResponseEntity< String>}
+     * @param queryCondition {@link HouseResources}
+     * @param currentPage    {@link Integer}
+     * @param pageSize       {@link Integer}
+     * @return {@link ResponseEntity< TableResult>}
      * @author Kang Yong
-     * @date 2022/3/6
+     * @date 2022/3/8
      */
     @GetMapping
-    public ResponseEntity<String> get() {
-        return ResponseEntity.ok("ok");
+    public ResponseEntity<TableResult> list(HouseResources queryCondition,
+                                            @RequestParam(name = "currentPage", defaultValue = "1") Integer currentPage,
+                                            @RequestParam(name = "pageSize", defaultValue = "10") Integer pageSize) {
+        return ResponseEntity.ok(this.houseResourcesService.queryList(queryCondition, currentPage, pageSize));
     }
+
+//    /**
+//     * 测试接口
+//     *
+//     * @return {@link ResponseEntity< String>}
+//     * @author Kang Yong
+//     * @date 2022/3/6
+//     */
+//    @GetMapping
+//    public ResponseEntity<String> get() {
+//        return ResponseEntity.ok("ok");
+//    }
 }

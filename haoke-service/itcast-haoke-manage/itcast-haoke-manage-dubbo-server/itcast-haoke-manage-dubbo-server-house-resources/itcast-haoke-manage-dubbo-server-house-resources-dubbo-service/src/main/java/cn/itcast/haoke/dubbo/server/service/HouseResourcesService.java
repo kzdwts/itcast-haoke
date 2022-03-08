@@ -1,6 +1,7 @@
 package cn.itcast.haoke.dubbo.server.service;
 
 import cn.itcast.haoke.dubbo.server.pojo.HouseResources;
+import cn.itcast.haoke.dubbo.server.vo.PageInfo;
 import com.baomidou.mybatisplus.extension.service.IService;
 
 /**
@@ -22,4 +23,15 @@ public interface HouseResourcesService extends IService<HouseResources> {
      */
     int saveHouseResources(HouseResources houseResources);
 
+    /**
+     * 分页查询房源列表
+     *
+     * @param pageNum        {@link int} 当前页
+     * @param pageSize       {@link int} 每页条数
+     * @param queryCondition {@link HouseResources} 查询条件
+     * @return {@link PageInfo < HouseResources>}
+     * @author Kang Yong
+     * @date 2022/3/8
+     */
+    PageInfo<HouseResources> queryHouseResourcesList(int pageNum, int pageSize, HouseResources queryCondition);
 }

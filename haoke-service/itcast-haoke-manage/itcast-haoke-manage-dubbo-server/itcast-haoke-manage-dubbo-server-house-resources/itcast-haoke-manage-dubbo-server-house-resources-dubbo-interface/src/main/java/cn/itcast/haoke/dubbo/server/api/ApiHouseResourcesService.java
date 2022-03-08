@@ -1,6 +1,7 @@
 package cn.itcast.haoke.dubbo.server.api;
 
 import cn.itcast.haoke.dubbo.server.pojo.HouseResources;
+import cn.itcast.haoke.dubbo.server.vo.PageInfo;
 
 /**
  * 房源信息 业务接口层 gegnxin
@@ -20,5 +21,17 @@ public interface ApiHouseResourcesService {
      * @date 2022/3/5
      */
     int saveHouseResources(HouseResources houseResources);
+
+    /**
+     * 分页查询房源列表
+     *
+     * @param pageNum        {@link int} 当前页
+     * @param pageSize       {@link int} 每页条数
+     * @param queryCondition {@link HouseResources} 查询条件
+     * @return {@link PageInfo< HouseResources>}
+     * @author Kang Yong
+     * @date 2022/3/8
+     */
+    PageInfo<HouseResources> queryHouseResourcesList(int pageNum, int pageSize, HouseResources queryCondition);
 
 }
