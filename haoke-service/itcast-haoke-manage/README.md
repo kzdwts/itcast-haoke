@@ -22,6 +22,13 @@
 * [percona v5.7.23](https://www.percona.com/software/mysql-database) MySQL升级版
   * Percona为MySQL数据库服务器进行了改进，在功能和性能上较MySQL有着很显著的提升
   * 该版本提升了在高负载情况下的InnoDB的性能，为DBA提供一些非常有用的性能诊断工具
+* [GraphQL](https://graphql.cn/) 用于描述复杂数据模型的一种查询语言，一种用于前后端数据查询方式的规范
+  * [规范地址](https://spec.graphql.cn/)
+  * [演示地址](http://graphql.cn/learn/schema/#type-system)
+  * [查询的规范](https://graphql.cn/learn/queries/)
+  * [GraphQL的Schema和类型规范](https://graphql.cn/learn/schema/)
+  * [java实现:graphql-java](https://www.graphql-java.com/)
+    * [github地址](https://github.com/graphql-java/graphql-java)
 
 ### 2.2、前端技术
 
@@ -37,10 +44,3 @@
     * 约定式路由
       * 类 next.js 的约定式路由，无需再维护一份冗余的路由配置，支持权限、动态路由、嵌套路由等等
   * [安装参考01](https://note.youdao.com/s/ChmmULc)
-* [GraphQL](https://graphql.cn/) 用于描述复杂数据模型的一种查询语言，一种用于前后端数据查询方式的规范
-  * [规范地址](https://spec.graphql.cn/)
-  * [演示地址](http://graphql.cn/learn/schema/#type-system)
-  * [查询的规范](https://graphql.cn/learn/queries/)
-  * [GraphQL的Schema和类型规范](https://graphql.cn/learn/schema/)
-  * [java实现:graphql-java](https://www.graphql-java.com/) 
-    * [github地址](https://github.com/graphql-java/graphql-java)
