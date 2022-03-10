@@ -1,5 +1,6 @@
 package cn.itcast.haoke.dubbo.api.service;
 
+import cn.itcast.haoke.dubbo.api.cusEnum.FileUploadStatusEnum;
 import cn.itcast.haoke.dubbo.api.vo.PicUploadResult;
 import org.apache.commons.lang3.RandomUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -28,8 +29,7 @@ public class PicUploadFileSystemService {
         // 校验图片格式
         boolean isLegal = false;
         for (String type : IMAGE_TYPE) {
-            if (StringUtils.endsWithIgnoreCase(uploadFile.getOriginalFilename(),
-                    type)) {
+            if (StringUtils.endsWithIgnoreCase(uploadFile.getOriginalFilename(), type)) {
                 isLegal = true;
                 break;
             }
@@ -37,7 +37,7 @@ public class PicUploadFileSystemService {
 
         PicUploadResult fileUploadResult = new PicUploadResult();
         if (!isLegal) {
-            fileUploadResult.setStatus("error");
+            fileUploadResult.setStatus(FileUploadStatusEnum.ERROR.getCodeStr());
             return fileUploadResult;
         }
 
@@ -55,10 +55,10 @@ public class PicUploadFileSystemService {
         } catch (IOException e) {
             e.printStackTrace();
             //上传失败
-            fileUploadResult.setStatus("error");
+            fileUploadResult.setStatus(FileUploadStatusEnum.ERROR.getCodeStr());
             return fileUploadResult;
         }
-        fileUploadResult.setStatus("done");
+        fileUploadResult.setStatus(FileUploadStatusEnum.DONE.getCodeStr());
         fileUploadResult.setUid(String.valueOf(System.currentTimeMillis()));
         return fileUploadResult;
     }

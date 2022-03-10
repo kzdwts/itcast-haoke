@@ -28,7 +28,8 @@ public class PicUploadResult implements Serializable {
 
     /**
      * 状态： uploading、done、error、removed
-     * 这个地方记得转为枚举 TODO
+     *
+     * @see cn.itcast.haoke.dubbo.api.cusEnum.FileUploadStatusEnum
      */
     private String status;
 

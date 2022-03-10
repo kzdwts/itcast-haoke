@@ -1,6 +1,7 @@
 package cn.itcast.haoke.dubbo.api.service;
 
 import cn.itcast.haoke.dubbo.api.config.AliyunConfig;
+import cn.itcast.haoke.dubbo.api.cusEnum.FileUploadStatusEnum;
 import cn.itcast.haoke.dubbo.api.vo.PicUploadResult;
 import com.aliyun.oss.OSS;
 import org.apache.commons.lang3.RandomUtils;
@@ -47,7 +48,7 @@ public class PicUploadService {
         // 格式是否合法
         if (!isLegal) {
             // 不合法
-            fileUploadResult.setStatus("error");
+            fileUploadResult.setStatus(FileUploadStatusEnum.ERROR.getCodeStr());
             return fileUploadResult;
         }
 
@@ -62,12 +63,12 @@ public class PicUploadService {
         } catch (IOException e) {
             e.printStackTrace();
             // 上传失败
-            fileUploadResult.setStatus("error");
+            fileUploadResult.setStatus(FileUploadStatusEnum.ERROR.getCodeStr());
             return fileUploadResult;
         }
 
         // 封装返回结果
-        fileUploadResult.setStatus("done");
+        fileUploadResult.setStatus(FileUploadStatusEnum.DONE.getCodeStr());
         fileUploadResult.setName(this.aliyunConfig.getUrlPrefix() + filePath);
         fileUploadResult.setUid(String.valueOf(System.currentTimeMillis()));
         return fileUploadResult;
