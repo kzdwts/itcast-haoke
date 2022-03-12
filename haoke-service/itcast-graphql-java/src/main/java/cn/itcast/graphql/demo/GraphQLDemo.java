@@ -1,6 +1,8 @@
 package cn.itcast.graphql.demo;
 
 import cn.itcast.graphql.vo.User;
+import graphql.ExecutionResult;
+import graphql.GraphQL;
 import graphql.schema.GraphQLFieldDefinition;
 import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLSchema;
@@ -48,7 +50,7 @@ public class GraphQLDemo {
      * @author Kang Yong
      * @date 2022/3/12
      */
-    public static GraphQLFieldDefinition createuserDefinition(GraphQLObjectType userType) {
+    public static GraphQLFieldDefinition createUserDefinition(GraphQLObjectType userType) {
         return newFieldDefinition()
                 .name("User")
                 .type(userType)
@@ -77,5 +79,19 @@ public class GraphQLDemo {
                 .field(newFieldDefinition().name("name").type(GraphQLString))
                 .field(newFieldDefinition().name("age").type(GraphQLInt))
                 .build();
+    }
+
+    public static void main(String[] args) {
+        GraphQLObjectType userObjectType = createUserObjectType();
+        GraphQLFieldDefinition userDefinition = createUserDefinition(userObjectType);
+
+        GraphQL graphQL = GraphQL.newGraphQL(createGraphqlSchema(userDefinition)).build();
+        String query = "{User{id,name}}";
+        ExecutionResult executionResult = graphQL.execute(query);
+
+        // 打印错误
+        System.out.println("错误：" + executionResult.getErrors());
+        // 打印数据
+        System.out.println("结果：" + executionResult.getData());
     }
 }
