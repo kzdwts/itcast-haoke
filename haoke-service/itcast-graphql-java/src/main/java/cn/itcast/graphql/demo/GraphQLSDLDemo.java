@@ -1,5 +1,6 @@
 package cn.itcast.graphql.demo;
 
+import cn.itcast.graphql.vo.Card;
 import cn.itcast.graphql.vo.User;
 import graphql.ExecutionResult;
 import graphql.GraphQL;
@@ -74,7 +75,7 @@ public class GraphQLSDLDemo {
                 .type("UserQuery", typeWiring -> typeWiring
                         .dataFetcher("user", environment -> {
                             Long id = environment.getArgument("id");
-                            return new User(id, "张三_" + id, 20 + id.intValue());
+                            return new User(id, "张三_" + id, 20 + id.intValue(), new Card("number_" + id, id));
                         })
                 )
                 .build();
@@ -86,7 +87,7 @@ public class GraphQLSDLDemo {
         RuntimeWiring runtimeWiring = createRuntimeWiring();
 
         GraphQL graphQL = GraphQL.newGraphQL(createGraphqlSchema(registry, runtimeWiring)).build();
-        String query = "{user(id:1){id,name,age}}";
+        String query = "{user(id:1){id,name,age,card{cardNumber}}}";
         ExecutionResult executionResult = graphQL.execute(query);
 
         System.out.println("查询字符串：" + query);
