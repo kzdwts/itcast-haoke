@@ -1,6 +1,5 @@
 package cn.itcast.haoke.dubbo.api.graphql;
 
-import cn.itcast.haoke.dubbo.api.service.HouseResourcesService;
 import graphql.GraphQL;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.idl.RuntimeWiring;
@@ -15,6 +14,7 @@ import org.springframework.util.ResourceUtils;
 import javax.annotation.PostConstruct;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.List;
 
 /**
  * 将GraphQL对象载入到Spring容器
@@ -28,8 +28,12 @@ public class GraphQLProvider {
 
     private GraphQL graphQL;
 
+//    @Autowired
+//    private HouseResourcesService houseResourcesService;
+
+    // 注入容器中MyDataFetcher所有的实现类
     @Autowired
-    private HouseResourcesService houseResourcesService;
+    private List<MyDataFetcher> myDataFetchers;
 
     /**
      * 初始化
@@ -61,12 +65,14 @@ public class GraphQLProvider {
 
     private RuntimeWiring buildWiring() {
         return RuntimeWiring.newRuntimeWiring()
-                .type("HaokeQuery", builder ->
-                        builder.dataFetcher("HouseResources", environment -> {
-                            Long id = environment.getArgument("id");
-                            return this.houseResourcesService.queryById(id);
-                        })
-                )
+                .type("HaokeQuery", builder -> {
+                    for (MyDataFetcher myDataFetcher : myDataFetchers) {
+                        builder.dataFetcher(myDataFetcher.fieldName(), environment ->
+                                myDataFetcher.dataFetcher(environment)
+                        );
+                    }
+                    return builder;
+                })
                 .build();
     }
 
