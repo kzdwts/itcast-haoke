@@ -46,4 +46,17 @@ public class ApiHouseResourcesServiceImpl implements ApiHouseResourcesService {
     public PageInfo<HouseResources> queryHouseResourcesList(int pageNum, int pageSize, HouseResources queryCondition) {
         return this.houseResourcesService.queryHouseResourcesList(pageNum, pageSize, queryCondition);
     }
+
+    /**
+     * 根据id查找房源数据
+     *
+     * @param id {@link Long} 房源id
+     * @return {@link HouseResources}
+     * @author Kang Yong
+     * @date 2022/3/12
+     */
+    @Override
+    public HouseResources queryHouseResourcesById(Long id) {
+        return this.houseResourcesService.queryHouseResourcesById(id);
+    }
 }

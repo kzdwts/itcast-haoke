@@ -63,4 +63,17 @@ public class HouseResourcesServiceImpl extends ServiceImpl<HouseResourcesMapper,
         // 返回分页数据
         return new PageInfo<HouseResources>(Long.valueOf(page.getTotal()).intValue(), pageNum, pageSize, page.getRecords());
     }
+
+    /**
+     * 根据id查询房源信息
+     *
+     * @param id {@link Long}
+     * @return {@link HouseResources}
+     * @author Kang Yong
+     * @date 2022/3/12
+     */
+    @Override
+    public HouseResources queryHouseResourcesById(Long id) {
+        return this.getById(id);
+    }
 }

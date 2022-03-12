@@ -23,6 +23,7 @@
   * Percona为MySQL数据库服务器进行了改进，在功能和性能上较MySQL有着很显著的提升
   * 该版本提升了在高负载情况下的InnoDB的性能，为DBA提供一些非常有用的性能诊断工具
 * [GraphQL](https://graphql.cn/) 用于描述复杂数据模型的一种查询语言，一种用于前后端数据查询方式的规范
+  * 用人话说就是，后端适配前端，前端要啥就传啥，后端就给啥
   * [规范地址](https://spec.graphql.cn/)
   * [演示地址](http://graphql.cn/learn/schema/#type-system)
   * [查询的规范](https://graphql.cn/learn/queries/)

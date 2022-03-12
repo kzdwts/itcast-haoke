@@ -34,4 +34,14 @@ public interface HouseResourcesService extends IService<HouseResources> {
      * @date 2022/3/8
      */
     PageInfo<HouseResources> queryHouseResourcesList(int pageNum, int pageSize, HouseResources queryCondition);
+
+    /**
+     * 根据id查询房源信息
+     *
+     * @param id {@link Long}
+     * @return {@link HouseResources}
+     * @author Kang Yong
+     * @date 2022/3/12
+     */
+    HouseResources queryHouseResourcesById(Long id);
 }

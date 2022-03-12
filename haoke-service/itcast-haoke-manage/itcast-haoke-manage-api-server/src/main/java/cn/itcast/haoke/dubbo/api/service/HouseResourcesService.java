@@ -50,4 +50,16 @@ public class HouseResourcesService {
         // 返回分页数据
         return new TableResult(pageInfo.getRecords(), new Pagination(currentPage, pageSize, pageInfo.getTotal()));
     }
+
+    /**
+     * 根据id查找房源数据
+     *
+     * @param id {@link Long} 房源id
+     * @return {@link HouseResources}
+     * @author Kang Yong
+     * @date 2022/3/12
+     */
+    public HouseResources queryById(Long id) {
+        return this.apiHouseResourcesService.queryHouseResourcesById(id);
+    }
 }
