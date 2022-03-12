@@ -6,6 +6,8 @@ import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLSchema;
 import graphql.schema.StaticDataFetcher;
 
+import static graphql.Scalars.*;
+import static graphql.schema.GraphQLFieldDefinition.newFieldDefinition;
 import static graphql.schema.GraphQLObjectType.newObject;
 
 /**
@@ -47,11 +49,33 @@ public class GraphQLDemo {
      * @date 2022/3/12
      */
     public static GraphQLFieldDefinition createuserDefinition(GraphQLObjectType userType) {
-        return GraphQLFieldDefinition.newFieldDefinition()
-                .name("user")
+        return newFieldDefinition()
+                .name("User")
                 .type(userType)
                 // 静态数据
                 .dataFetcher(new StaticDataFetcher(new User(1L, "张三", 20)))
+                .build();
+    }
+
+    /**
+     * 定义User对象类型
+     * <p>
+     * type User { # 定义对象
+     *      id:Long! # ！标识该属性是非空项
+     *      name:String
+     *      age:Int
+     * }
+     *
+     * @return {@link GraphQLObjectType}
+     * @author Kang Yong
+     * @date 2022/3/12
+     */
+    public static GraphQLObjectType createUserObjectType() {
+        return newObject()
+                .name("User")
+                .field(newFieldDefinition().name("id").type(GraphQLLong))
+                .field(newFieldDefinition().name("name").type(GraphQLString))
+                .field(newFieldDefinition().name("age").type(GraphQLInt))
                 .build();
     }
 }
