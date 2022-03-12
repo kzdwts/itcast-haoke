@@ -6,9 +6,9 @@ import graphql.GraphQL;
 import graphql.schema.GraphQLFieldDefinition;
 import graphql.schema.GraphQLObjectType;
 import graphql.schema.GraphQLSchema;
-import graphql.schema.StaticDataFetcher;
 
 import static graphql.Scalars.*;
+import static graphql.schema.GraphQLArgument.newArgument;
 import static graphql.schema.GraphQLFieldDefinition.newFieldDefinition;
 import static graphql.schema.GraphQLObjectType.newObject;
 
@@ -25,7 +25,7 @@ public class GraphQLDemo {
      * 定义schema
      * <p>
      * schema { # 定义查询
-     *      query: userQuery
+     * query: userQuery
      * }
      *
      * @param userDefinition {@link GraphQLFieldDefinition}
@@ -42,7 +42,7 @@ public class GraphQLDemo {
      * 定义查询的类型
      * <p>
      * type UserQuery {
-     *      user : User # 指定对象
+     * user : User # 指定对象
      * }
      *
      * @param userType {@link GraphQLObjectType}
@@ -54,8 +54,12 @@ public class GraphQLDemo {
         return newFieldDefinition()
                 .name("User")
                 .type(userType)
-                // 静态数据
-                .dataFetcher(new StaticDataFetcher(new User(1L, "张三", 20)))
+//                .dataFetcher(new StaticDataFetcher(new User(1L, "张三", 20))) // 静态数据
+                .argument(newArgument().name("id").type(GraphQLLong).build()) // 设置参数
+                .dataFetcher(environment -> {
+                    Long id = environment.getArgument("id");
+                    return new User(id, "张三" + id, 20 + id.intValue());
+                })
                 .build();
     }
 
@@ -63,9 +67,9 @@ public class GraphQLDemo {
      * 定义User对象类型
      * <p>
      * type User { # 定义对象
-     *      id:Long! # ！标识该属性是非空项
-     *      name:String
-     *      age:Int
+     * id:Long! # ！标识该属性是非空项
+     * name:String
+     * age:Int
      * }
      *
      * @return {@link GraphQLObjectType}
@@ -86,7 +90,7 @@ public class GraphQLDemo {
         GraphQLFieldDefinition userDefinition = createUserDefinition(userObjectType);
 
         GraphQL graphQL = GraphQL.newGraphQL(createGraphqlSchema(userDefinition)).build();
-        String query = "{User{id,name}}";
+        String query = "{User(id:1){id,name,age}}";
         ExecutionResult executionResult = graphQL.execute(query);
 
         // 打印错误
