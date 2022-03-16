@@ -83,4 +83,29 @@ CREATE TABLE `tb_house_resources`  (
 -- Records of tb_house_resources
 -- ----------------------------
 
+
+-- ----------------------------
+-- Table structure for tb_house_resources
+-- ----------------------------
+CREATE TABLE `tb_ad` (
+    `id`      bigint(20) NOT NULL AUTO_INCREMENT,
+    `type`    int(10)      DEFAULT NULL COMMENT '广告类型',
+    `title`   varchar(100) DEFAULT NULL COMMENT '描述',
+    `url`     varchar(200) DEFAULT NULL COMMENT '图片URL地址',
+    `created` datetime     DEFAULT NULL,
+    `updated` datetime     DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE = InnoDB
+  DEFAULT CHARSET = utf8 COMMENT ='广告表';
+
+-- ----------------------------
+-- Records of tb_house_resources
+-- ----------------------------
+INSERT INTO `tb_ad` (`id`, `type`, `title`, `url`, `created`, `updated`) VALUES ('1', '1', 'UniCity万科天空之城', 'http://itcast-haoke.oss-cn- qingdao.aliyuncs.com/images/2018/11/26/15432029097062227.jpg', '2018-11-26 11:28:49', '2018-11-26 11:28:51');
+INSERT INTO `tb_ad` (`id`, `type`, `title`, `url`, `created`, `updated`) VALUES ('2', '1', '天和尚海庭前', 'http://itcast-haoke.oss-cn- qingdao.aliyuncs.com/images/2018/11/26/1543202958579877.jpg', '2018-11-26 11:29:27', '2018-11-26 11:29:29');
+INSERT INTO `tb_ad` (`id`, `type`, `title`, `url`, `created`, `updated`) VALUES ('3', '1', '[奉贤 南桥] 光语著', 'http://itcast-haoke.oss-cn- qingdao.aliyuncs.com/images/2018/11/26/15432029946721854.jpg', '2018-11-26 11:30:04', '2018-11-26 11:30:06');
+INSERT INTO `tb_ad` (`id`, `type`, `title`, `url`, `created`, `updated`) VALUES ('4', '1', '[上海周边 嘉兴] 融创海逸长洲', 'http://itcast-haoke.oss-cn- qingdao.aliyuncs.com/images/2018/11/26/15432029946721854.jpg', '2018-11-26 11:30:49', '2018-11-26 11:30:53');
+
+
+
 SET FOREIGN_KEY_CHECKS = 1;
