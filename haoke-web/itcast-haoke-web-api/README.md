@@ -14,6 +14,4 @@ npm install
 npm run dev
 ```
 
-## 路径
 
-![Image text](public/itcast-haoke-web-api-路径描述.png)

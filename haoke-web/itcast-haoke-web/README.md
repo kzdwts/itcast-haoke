@@ -13,3 +13,7 @@ npm install
 # 启动服务
 npm start
 ```
+
+## 路径
+
+![Image text](public/itcast-haoke-web-api-路径描述.png)
