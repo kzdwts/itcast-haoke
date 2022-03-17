@@ -61,7 +61,7 @@ public class HouseResourcesServiceImpl extends ServiceImpl<HouseResourcesMapper,
         IPage<HouseResources> page = this.page(new Page<HouseResources>(pageNum, pageSize), queryWrapper);
 
         // 返回分页数据
-        return new PageInfo<HouseResources>(Long.valueOf(page.getTotal()).intValue(), pageNum, pageSize, page.getRecords());
+        return new PageInfo<HouseResources>(page.getTotal(), pageNum, pageSize, page.getRecords());
     }
 
     /**

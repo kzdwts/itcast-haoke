@@ -21,7 +21,7 @@ public class PageInfo<T> implements Serializable {
     /**
      * 总条数
      */
-    private Integer total;
+    private Long total;
 
     /**
      * 当前页

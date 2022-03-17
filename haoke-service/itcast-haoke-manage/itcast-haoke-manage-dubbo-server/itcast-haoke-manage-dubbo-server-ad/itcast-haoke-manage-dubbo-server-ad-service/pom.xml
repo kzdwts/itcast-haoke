@@ -3,21 +3,14 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
-        <artifactId>itcast-haoke-manage</artifactId>
+        <artifactId>itcast-haoke-manage-dubbo-server-ad</artifactId>
         <groupId>cn.itcast.haoke</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>itcast-haoke-manage-dubbo-server</artifactId>
-    <packaging>pom</packaging>
-    <description>好客管理系统服务工程-所有微服务的父工程</description>
-    <modules>
-        <module>itcast-haoke-manage-dubbo-server-house-resources</module>
-        <module>itcast-haoke-manage-dubbo-server-generator</module>
-        <module>itcast-haoke-manage-dubbo-server-common</module>
-        <module>itcast-haoke-manage-dubbo-server-ad</module>
-    </modules>
+    <artifactId>itcast-haoke-manage-dubbo-server-ad-service</artifactId>
+    <description>广告业务实现工程</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -25,10 +18,19 @@
     </properties>
 
     <dependencies>
+        <!--数据库连接池-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter</artifactId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
         </dependency>
+
+        <!--haoke广告接口层-->
+        <dependency>
+            <groupId>cn.itcast.haoke</groupId>
+            <artifactId>itcast-haoke-manage-dubbo-server-ad-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
     </dependencies>
 
 </project>
