@@ -17,5 +17,5 @@ import java.io.Serializable;
 public class Pagination implements Serializable {
     private Integer current;
     private Integer pageSize;
-    private Integer total;
+    private Long total;
 }

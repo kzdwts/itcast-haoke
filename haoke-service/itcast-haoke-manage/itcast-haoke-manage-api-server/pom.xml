@@ -24,10 +24,16 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!--dubbo接口-->
+        <!--dubbo服务 房源接口-->
         <dependency>
             <groupId>cn.itcast.haoke</groupId>
             <artifactId>itcast-haoke-manage-dubbo-server-house-resources-dubbo-interface</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <!--dubbo服务 广告接口-->
+        <dependency>
+            <groupId>cn.itcast.haoke</groupId>
+            <artifactId>itcast-haoke-manage-dubbo-server-ad-interface</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 
