@@ -44,7 +44,8 @@ class Home extends React.Component {
     //   })
     // });
     let swipe = new Promise((resolve, reject) => {
-      axios.post('/homes/swipe').then((data)=>{
+      // axios.post('/homes/swipe').then((data)=>{
+      axios.get('http://127.0.0.1:18080/ad').then((data)=>{
         resolve(data.data.list);
       });
     })
@@ -134,11 +135,11 @@ class Home extends React.Component {
     const swipeData = this.state.swipeData;
     let swipe = null;
     if(swipeLoading) {
-      swipe = <ImageGallery 
-                preventDefaultTouchmoveEvent={true} 
-                autoPlay={true} 
-                disableSwipe={false} 
-                showThumbnails={false} 
+      swipe = <ImageGallery
+                preventDefaultTouchmoveEvent={true}
+                autoPlay={true}
+                disableSwipe={false}
+                showThumbnails={false}
                 items={swipeData} />
     }
     // 菜单渲染
