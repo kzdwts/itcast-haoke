@@ -5,6 +5,7 @@ import cn.itcast.haoke.dubbo.api.vo.WebResult;
 import cn.itcast.haoke.dubbo.server.pojo.TbAd;
 import cn.itcast.haoke.dubbo.server.vo.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ import java.util.Map;
  * @date 2022/3/17
  * @since 1.0.0
  */
+@CrossOrigin
 @RestController
 @RequestMapping("/ad")
 public class AdController {
@@ -38,7 +40,7 @@ public class AdController {
     @GetMapping
     public WebResult queryIndexAd() {
         // 加载数据
-        PageInfo<TbAd> adPageInfo = this.adService.queryAdList(1, 1, 3);
+        PageInfo<TbAd> adPageInfo = this.adService.queryAdList(1, 1, 6);
         List<TbAd> adList = adPageInfo.getRecords();
 
         // 封装结果集

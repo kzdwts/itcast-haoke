@@ -1,6 +1,7 @@
 package cn.itcast.haoke.dubbo.server.service.impl;
 
 import cn.itcast.haoke.dubbo.server.mapper.TbAdMapper;
+import cn.itcast.haoke.dubbo.server.pojo.BasePojo;
 import cn.itcast.haoke.dubbo.server.pojo.TbAd;
 import cn.itcast.haoke.dubbo.server.service.AdService;
 import cn.itcast.haoke.dubbo.server.vo.PageInfo;
@@ -34,7 +35,8 @@ public class AdServiceImpl extends ServiceImpl<TbAdMapper, TbAd> implements AdSe
     public PageInfo<TbAd> queryAdList(TbAd tbAd, Integer pageNum, Integer pageSize) {
         // 查询条件
         LambdaQueryWrapper<TbAd> queryWrapper = new LambdaQueryWrapper<>();
-        queryWrapper.eq(TbAd::getType, tbAd.getType());
+        queryWrapper.eq(TbAd::getType, tbAd.getType())
+                .orderByDesc(BasePojo::getCreated);
 
         // 查询
         IPage<TbAd> page = this.page(new Page<>(pageNum, pageSize), queryWrapper);
