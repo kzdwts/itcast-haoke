@@ -9,12 +9,8 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>itcast-haoke-manage-dubbo-server-house-resources</artifactId>
-    <packaging>pom</packaging>
-    <modules>
-        <module>itcast-haoke-manage-dubbo-server-house-resources-dubbo-interface</module>
-        <module>itcast-haoke-manage-dubbo-server-house-resources-dubbo-service</module>
-    </modules>
+    <artifactId>itcast-haoke-manage-dubbo-server-common</artifactId>
+    <description>通用工程</description>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -22,23 +18,13 @@
     </properties>
 
     <dependencies>
-        <!--引入common-->
-        <dependency>
-            <groupId>cn.itcast.haoke</groupId>
-            <artifactId>itcast-haoke-manage-dubbo-server-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <optional>true</optional>
-        </dependency>
+        <!--mybatis-plus-->
         <dependency>
             <groupId>com.baomidou</groupId>
             <artifactId>mybatis-plus-boot-starter</artifactId>
             <version>3.0.5</version>
-            <optional>true</optional>
+            <optional>true</optional> <!-- 依赖只能在该项目中传递，并不会被传递到引用该项目的父项目中，父项目需要重新引用该依赖才可以 -->
+            <!-- https://www.cnblogs.com/quanxiaoha/p/12752265.html -->
         </dependency>
         <dependency>
             <groupId>mysql</groupId>
@@ -47,6 +33,12 @@
             <optional>true</optional>
         </dependency>
 
+        <!--mysql--><!--工具-->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+        </dependency>
     </dependencies>
 
 </project>
