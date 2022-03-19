@@ -6,6 +6,7 @@
   * doc（文档相关）
   * itcast-haoke-manage-api-server（api服务）
   * itcast-haoke-manage-api-dubbo-server（dubbo服务）
+    * itcast-haoke-manage-dubbo-server-ad（广告父工程）
     * itcast-haoke-manage-dubbo-server-generator(MyBatis（Plus代码生成器）
     * itcast-haoke-manage-dubbo-server-house-resources（房源服务父工程）
       * itcast-haoke-manage-dubbo-server-house-resources-dubbo-interface（房源服务接口定义工程）
