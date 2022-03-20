@@ -50,22 +50,26 @@ class Home extends React.Component {
       });
     })
     let menu = new Promise((resolve, reject) => {
-      axios.post('/homes/menu').then((data)=>{
+      // axios.post('/homes/menu').then((data)=>{
+      axios.get('http://127.0.0.1:18080/mock/index/menu').then((data)=>{
         resolve(data.data.list);
       });
     })
     let info = new Promise((resolve, reject) => {
-      axios.post('/homes/info').then((data)=>{
+      // axios.post('/homes/info').then((data)=>{
+      axios.get('http://127.0.0.1:18080/mock/index/info').then((data)=>{
         resolve(data.data.list);
       });
     })
     let faq = new Promise((resolve, reject) => {
-      axios.post('/homes/faq').then((data)=>{
+      // axios.post('/homes/faq').then((data)=>{
+      axios.get('http://127.0.0.1:18080/mock/index/faq').then((data)=>{
         resolve(data.data.list);
       });
     })
     let house = new Promise((resolve, reject) => {
-      axios.post('/homes/house').then((data)=>{
+      // axios.post('/homes/house').then((data)=>{
+      axios.get('http://127.0.0.1:18080/mock/index/house').then((data)=>{
         resolve(data.data.list);
       });
     })
