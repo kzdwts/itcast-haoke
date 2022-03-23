@@ -44,4 +44,14 @@ public interface ApiHouseResourcesService {
      */
     HouseResources queryHouseResourcesById(Long id);
 
+    /**
+     * 修改房源信息
+     *
+     * @param houseResources {@link HouseResources}
+     * @return {@link Boolean}
+     * @author Kang Yong
+     * @date 2022/3/23
+     */
+    Boolean updateHouseResources(HouseResources houseResources);
+
 }

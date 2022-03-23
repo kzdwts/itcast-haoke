@@ -76,4 +76,18 @@ public class HouseResourcesServiceImpl extends ServiceImpl<HouseResourcesMapper,
     public HouseResources queryHouseResourcesById(Long id) {
         return this.getById(id);
     }
+
+    /**
+     * 修改房源信息
+     *
+     * @param houseResources {@link HouseResources}
+     * @return {@link Boolean}
+     * @author Kang Yong
+     * @date 2022/3/23
+     */
+    @Override
+    public Boolean updateHouseResources(HouseResources houseResources) {
+        return this.updateById(houseResources);
+    }
+
 }

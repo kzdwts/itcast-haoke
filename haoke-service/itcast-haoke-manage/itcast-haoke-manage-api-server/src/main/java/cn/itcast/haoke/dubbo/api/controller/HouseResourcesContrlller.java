@@ -56,6 +56,24 @@ public class HouseResourcesContrlller {
         return ResponseEntity.ok(this.houseResourcesService.queryList(queryCondition, currentPage, pageSize));
     }
 
+    /**
+     * 修改房源信息
+     *
+     * @param houseResources {@link HouseResources}
+     * @return {@link ResponseEntity< Void>}
+     * @author Kang Yong
+     * @date 2022/3/23
+     */
+    @PutMapping
+    public ResponseEntity<Void> update(@RequestBody HouseResources houseResources) {
+        Boolean bool = this.houseResourcesService.update(houseResources);
+        if (bool) {
+            return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
+        }
+
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+    }
+
 //    /**
 //     * 测试接口
 //     *

@@ -59,4 +59,17 @@ public class ApiHouseResourcesServiceImpl implements ApiHouseResourcesService {
     public HouseResources queryHouseResourcesById(Long id) {
         return this.houseResourcesService.queryHouseResourcesById(id);
     }
+
+    /**
+     * 修改房源信息
+     *
+     * @param houseResources {@link HouseResources}
+     * @return {@link Boolean}
+     * @author Kang Yong
+     * @date 2022/3/23
+     */
+    @Override
+    public Boolean updateHouseResources(HouseResources houseResources) {
+        return this.houseResourcesService.updateHouseResources(houseResources);
+    }
 }
