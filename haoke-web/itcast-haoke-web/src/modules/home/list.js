@@ -3,6 +3,29 @@ import { withRouter } from 'react-router';
 import { Icon,Item } from 'semantic-ui-react';
 import config from '../../common.js';
 import axios from 'axios';
+import ApolloClient from "apollo-boost";
+import gql from "graphql-tag";
+
+const client = new ApolloClient({
+    uri: "http://127.0.0.1:18080/graphql"
+});
+
+//定义查询
+const QUERY_LIST = gql`
+    query HouseResourcesList($pageSize: Int, $page: Int) {
+        HouseResourcesList(pageSize: $pageSize, page: $page) {
+            list {
+                id
+                pic
+                title
+                coveredArea
+                orientation
+                floor
+                rent
+            }
+        }
+    }
+`;
 
 class HouseList extends React.Component {
   constructor(props) {
@@ -25,33 +48,43 @@ class HouseList extends React.Component {
       typeName: query.name,
       type: query.type
     })
-    axios.post('/homes/list',{
-      home_type: query.type
-    }).then(ret=>{
-      this.setState({
-        listData: ret.data,
-        loadFlag: true
-      })
-    })
+
+      // 查询
+      client.query({query: QUERY_LIST, variables: {"pageSize":3,"page":1}}).then(result => {
+          this.setState({
+              listData:result.data.HouseResourcesList.list,
+              loadFlag: true
+          });
+      });
+
+    // axios.post('/homes/list',{
+    //   home_type: query.type
+    // }).then(ret=>{
+    //   this.setState({
+    //     listData: ret.data,
+    //     loadFlag: true
+    //   })
+    // })
+
   }
   render() {
     let list = null;
     if(this.state.loadFlag) {
       list = this.state.listData.map(item=>{
         return (
-          <Item key={item.id}>
-            <Item.Image src={config.imgBaseUrl+'public/home.png'}/>
-            <Item.Content>
-              <Item.Header>{item.home_name}</Item.Header>
-              <Item.Meta>
-                <span className='cinema'>{item.home_desc}</span>
-              </Item.Meta>
-              <Item.Description>
-                {item.home_tags}
-              </Item.Description>
-              <Item.Description>{item.home_price}</Item.Description>
-            </Item.Content>
-          </Item>
+            <Item key={item.id}>
+                <Item.Image src={item.pic.split(',')[0]}/>
+                <Item.Content>
+                    <Item.Header>{item.title}</Item.Header>
+                    <Item.Meta>
+                      <span className='cinema'>{item.coveredArea}㎡/{item.orientation}/{item.floor}</span>
+                    </Item.Meta>
+                    <Item.Description>
+                        上海
+                    </Item.Description>
+                    <Item.Description>{item.rent}</Item.Description>
+                </Item.Content>
+            </Item>
         )
       });
     }

@@ -42,7 +42,6 @@ class AddResource extends PureComponent {
   handleSubmit = e => {
     const { dispatch, form } = this.props;
     e.preventDefault();
-    console.log(this.state.fileList);
     form.validateFieldsAndScroll((err, values) => {
       if (!err) {
         if (values.facilities) {
@@ -100,7 +99,6 @@ class AddResource extends PureComponent {
   };
 
   handleFileList = obj => {
-    console.log(obj, '图片列表');
     let pics = new Set();
     obj.forEach((v, k) => {
       if (v.response) {
@@ -119,6 +117,7 @@ class AddResource extends PureComponent {
       estateDataSource: [],
       estateAddress: '',
       estateId: '',
+      pics: [],
     };
   }
 
@@ -179,7 +178,7 @@ class AddResource extends PureComponent {
             </FormItem>
             <FormItem {...formItemLayout} label="房源标题">
               {getFieldDecorator('title', { rules: [{ required: true, message: '此项为必填项' }] })(
-                <input style={{ width: '100%' }} />
+                <Input style={{ width: '100%' }} />
               )}
             </FormItem>
             <FormItem {...formItemLayout} label="楼栋">
@@ -324,7 +323,7 @@ class AddResource extends PureComponent {
           </Card>
           <Card bordered={false} title="图片信息">
             <FormItem {...formItemLayout} label="房源描述">
-              {getFieldDecorator('desc')(
+              {getFieldDecorator('houseDesc')(
                 <TextArea placeholder="请输入备注信息" autosize={{ minRows: 4, maxRows: 10 }} />
               )}
               <span>

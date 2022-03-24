@@ -1,12 +1,13 @@
 import React, { PureComponent, Fragment } from 'react';
 import { connect } from 'dva';
 import moment from 'moment';
-import { Row, Col, Card, Form, Input, Select, Icon, Button, Divider } from 'antd';
+import { Row, Col, Card, Form, Input, Select, Icon, Button, Divider, Carousel } from 'antd';
 import StandardTable from '@/components/StandardTable';
 import PageHeaderWrapper from '@/components/PageHeaderWrapper';
 
 import styles from '../TableList.less';
 import ShowPics from './ShowPics';
+import EditResource from './EditResource';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -22,6 +23,7 @@ const payType = new Map([
   [4, '年付押一'],
   [5, '其它'],
 ]);
+
 /* eslint react/no-multi-comp:0 */
 @connect(({ houseResource, loading }) => ({
   houseResource,
@@ -58,7 +60,7 @@ class Resource extends PureComponent {
       title: '楼栋',
       render: (text, record, index) => {
         return (
-          record.buildingFloorNum + '栋' + record.buildingUnit + '单元' + record.buildingNum + '号'
+          record.buildingFloorNum + '栋' + record.buildingNum + '单元' + record.buildingUnit + '号'
         );
       },
     },
@@ -87,7 +89,9 @@ class Resource extends PureComponent {
       title: '操作',
       render: (text, record) => (
         <Fragment>
-          <a onClick={() => this.handleUpdateModalVisible(true, record)}>查看详情</a>
+          <a onClick={() => {}}>查看</a>
+          <Divider type="vertical" />
+          <EditResource record={record} reload={this.reload.bind(this)} />
           <Divider type="vertical" />
           <a href="">删除</a>
         </Fragment>
@@ -95,9 +99,16 @@ class Resource extends PureComponent {
     },
   ];
 
+  reload() {
+    const { dispatch } = this.props;
+    dispatch({
+      type: 'houseResource/fetch',
+      // type: 'rule/fetch',
+    });
+  }
+
   componentDidMount() {
     //当组件挂载完成后执行加载数据
-    console.log('loading.......');
     const { dispatch } = this.props;
     dispatch({
       type: 'houseResource/fetch',
@@ -333,8 +344,6 @@ class Resource extends PureComponent {
       loading,
     } = this.props;
     const { selectedRows } = this.state;
-
-    console.log(this.props);
 
     return (
       <PageHeaderWrapper title="房源管理">

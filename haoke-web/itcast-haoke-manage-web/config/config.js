@@ -62,7 +62,7 @@ export default {
   },
   proxy: {
     '/haoke/': {
-      target: 'http://localhost:18080',
+      target: 'http://127.0.0.1:18080',
       changeOrigin: true,
       pathRewrite: { '^/haoke/': '' },
     },
