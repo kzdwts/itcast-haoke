@@ -1,6 +1,6 @@
 package cn.itcast.haoke.dubbo.api.service;
 
-import cn.itcast.haoke.dubbo.api.config.AliyunConfig;
+import cn.itcast.haoke.dubbo.api.properties.AliyunConfig;
 import cn.itcast.haoke.dubbo.api.cusEnum.FileUploadStatusEnum;
 import cn.itcast.haoke.dubbo.api.vo.PicUploadResult;
 import com.aliyun.oss.OSS;

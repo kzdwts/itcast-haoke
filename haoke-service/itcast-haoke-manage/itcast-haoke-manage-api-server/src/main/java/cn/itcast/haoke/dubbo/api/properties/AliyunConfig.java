@@ -1,4 +1,4 @@
-package cn.itcast.haoke.dubbo.api.config;
+package cn.itcast.haoke.dubbo.api.properties;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClient;

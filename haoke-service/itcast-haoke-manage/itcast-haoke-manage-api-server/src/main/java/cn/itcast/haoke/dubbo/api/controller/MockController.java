@@ -1,6 +1,6 @@
 package cn.itcast.haoke.dubbo.api.controller;
 
-import cn.itcast.haoke.dubbo.api.config.MockConfig;
+import cn.itcast.haoke.dubbo.api.properties.MockConfig;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

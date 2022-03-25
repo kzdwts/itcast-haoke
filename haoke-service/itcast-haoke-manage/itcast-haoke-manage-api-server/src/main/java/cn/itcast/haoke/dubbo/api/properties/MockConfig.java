@@ -1,4 +1,4 @@
-package cn.itcast.haoke.dubbo.api.config;
+package cn.itcast.haoke.dubbo.api.properties;
 
 import lombok.Data;
 import lombok.ToString;
