@@ -69,7 +69,7 @@ public class RedisCacheInterceptor implements HandlerInterceptor {
      * @author Kang Yong
      * @date 2022/3/27
      */
-    private static String createRedisKey(HttpServletRequest request) throws IOException {
+    public static String createRedisKey(HttpServletRequest request) throws IOException {
         String paramStr = request.getRequestURI();
 
         Map<String, String[]> parameterMap = request.getParameterMap();
