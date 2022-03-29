@@ -41,6 +41,10 @@ public class RedisCacheInterceptor implements HandlerInterceptor {
      */
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
+        if (StringUtils.equalsIgnoreCase(request.getMethod(), "OPTIONS")) {
+            return true;
+        }
+
         if (!StringUtils.equalsIgnoreCase(request.getMethod(), "get")) {
             // 非get请求，如果不是graphql请求，放行
             if (!StringUtils.equalsIgnoreCase(request.getRequestURI(), "/graphql")) {
@@ -57,6 +61,13 @@ public class RedisCacheInterceptor implements HandlerInterceptor {
         // 命中缓存，写出数据
         response.setCharacterEncoding("UTF-8");
         response.setContentType("application/json; charset=UTF-8");
+        // 支持跨域
+        response.setHeader("Access-Control-Allow-Origin", "*");
+        response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type,X-Token");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+
         response.getWriter().write(data);
         return false;
     }
