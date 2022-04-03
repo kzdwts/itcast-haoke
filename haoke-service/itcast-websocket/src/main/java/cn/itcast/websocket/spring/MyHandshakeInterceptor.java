@@ -35,7 +35,7 @@ public class MyHandshakeInterceptor implements HandshakeInterceptor {
         // 将用户id放入socket处理器的会话（WebSocketSession）中
         attributes.put("uid", 1001);
         System.out.println("===开始握手===");
-        return false;
+        return true;
     }
 
     /**
