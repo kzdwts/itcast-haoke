@@ -4,7 +4,6 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
-import com.mongodb.client.model.Filters;
 import com.mongodb.client.model.Projections;
 import com.mongodb.client.model.Sorts;
 import com.mongodb.client.model.Updates;
@@ -17,9 +16,6 @@ import org.junit.Test;
 import java.util.function.Consumer;
 
 import static com.mongodb.client.model.Filters.*;
-import static com.mongodb.client.model.Filters.and;
-import static com.mongodb.client.model.Projections.*;
-import static com.mongodb.client.model.Sorts.*;
 
 /**
  * crud操作
@@ -75,4 +71,58 @@ public class TestCRUD {
                     System.out.println(document.toJson());
                 });
     }
+
+    /**
+     * 新增数据
+     *
+     * @author Kang Yong
+     * @date 2022/4/7
+     */
+    @Test
+    public void testInsert() {
+        Document document = new Document("id", 10001).append("name", "张三").append("age", 30);
+        this.mongoCollection.insertOne(document);
+        System.out.println("插入数据成功！");
+
+        this.mongoCollection.find(eq("id", 10001))
+                .forEach((Consumer<? super Document>) doc -> {
+                    System.out.println(doc.toJson());
+                });
+    }
+
+    /**
+     * 更新
+     *
+     * @author Kang Yong
+     * @date 2022/4/7
+     */
+    @Test
+    public void testUpdate() {
+        UpdateResult updateResult = this.mongoCollection.updateOne(
+                eq("id", 10001),
+                Updates.set("age", 25)
+        );
+        System.out.println(updateResult);
+
+        this.mongoCollection.find(
+                        eq("id", 10001))
+                .forEach((Consumer<? super Document>) doc -> {
+                    System.out.println(doc.toJson());
+                });
+    }
+
+    /**
+     * 删除
+     *
+     * @author Kang Yong
+     * @date 2022/4/7
+     */
+    @Test
+    public void testDelete() {
+        DeleteResult deleteResult = this.mongoCollection.deleteOne(
+                eq("id", 10001)
+        );
+        System.out.println(deleteResult);
+    }
+
 }
