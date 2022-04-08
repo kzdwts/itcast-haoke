@@ -5,6 +5,10 @@ import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
+import com.mongodb.client.model.Filters;
+import com.mongodb.client.model.Updates;
+import com.mongodb.client.result.DeleteResult;
+import com.mongodb.client.result.UpdateResult;
 import org.bson.codecs.configuration.CodecRegistries;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
@@ -14,6 +18,7 @@ import org.junit.Test;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 /**
  * 面向对象操作
@@ -75,6 +80,50 @@ public class TestPerson {
         );
         this.personMongoCollection.insertMany(personList);
         System.out.println("插入数据成功");
+    }
+
+    /**
+     * 查询
+     *
+     * @author Kang Yong
+     * @date 2022/4/8
+     */
+    @Test
+    public void testQuery() {
+        this.personMongoCollection.find(
+                Filters.eq("name", "张三")
+        ).forEach((Consumer<? super Person>) person -> {
+            System.out.println(person);
+        });
+    }
+
+    /**
+     * 更新
+     *
+     * @author Kang Yong
+     * @date 2022/4/8
+     */
+    @Test
+    public void testUpdate() {
+        UpdateResult updateResult = this.personMongoCollection.updateMany(
+                Filters.eq("name", "张三"),
+                Updates.set("age", 22)
+        );
+        System.out.println(updateResult);
+    }
+
+    /**
+     * 删除
+     *
+     * @author Kang Yong
+     * @date 2022/4/8
+     */
+    @Test
+    public void testDelete() {
+        DeleteResult deleteResult = this.personMongoCollection.deleteOne(
+                Filters.eq("name", "张三")
+        );
+        System.out.println(deleteResult);
     }
 
 }
