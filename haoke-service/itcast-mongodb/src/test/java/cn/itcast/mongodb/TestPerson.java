@@ -12,6 +12,9 @@ import org.bson.types.ObjectId;
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * 面向对象操作
  *
@@ -52,6 +55,25 @@ public class TestPerson {
     public void testInsert() {
         Person person = new Person(ObjectId.get(), "张三", 20, new Address("人民路", "上海市", "666666"));
         this.personMongoCollection.insertOne(person);
+        System.out.println("插入数据成功");
+    }
+
+    /**
+     * 插入多条
+     *
+     * @author Kang Yong
+     * @date 2022/4/8
+     */
+    @Test
+    public void testInserts() {
+        List<Person> personList = Arrays.asList(
+                new Person(ObjectId.get(), "张三", 20, new Address("人民路", "上海市", "233400")),
+                new Person(ObjectId.get(), "李四", 21, new Address("北京西路", "北京市", "233400")),
+                new Person(ObjectId.get(), "王五", 24, new Address("东至路", "合肥市", "233400")),
+                new Person(ObjectId.get(), "赵六", 23, new Address("新蚌埠路", "蚌埠市", "233400")),
+                new Person(ObjectId.get(), "田七", 22, new Address("怀远路", "蚌埠市", "233400"))
+        );
+        this.personMongoCollection.insertMany(personList);
         System.out.println("插入数据成功");
     }
 
