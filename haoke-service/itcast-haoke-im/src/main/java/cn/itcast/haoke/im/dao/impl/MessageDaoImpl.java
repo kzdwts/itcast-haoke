@@ -5,7 +5,16 @@ import cn.itcast.haoke.im.pojo.Message;
 import com.mongodb.client.result.DeleteResult;
 import com.mongodb.client.result.UpdateResult;
 import org.bson.types.ObjectId;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.stereotype.Component;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,7 +24,11 @@ import java.util.List;
  * @date 2022/4/10
  * @since 1.0.0
  */
+@Component
 public class MessageDaoImpl implements MessageDao {
+
+    @Autowired
+    private MongoTemplate mongoTemplate;
 
     /**
      * 查询点对点聊天记录
@@ -30,7 +43,16 @@ public class MessageDaoImpl implements MessageDao {
      */
     @Override
     public List<Message> findListByFromAndTo(Long fromId, Long toId, Integer page, Integer rows) {
-        return null;
+        Criteria fromList = Criteria.where("from.id").is(fromId).and("to.id").is(toId);
+        Criteria toList = Criteria.where("from.id").is(toId).and("to.id").is(fromId);
+        Criteria criteria = new Criteria().orOperator(fromList, toList);
+
+        PageRequest pageRequest = PageRequest.of(page - 1, rows, Sort.by(Sort.Direction.ASC, "send_date"));
+        Query query = new Query(criteria).with(pageRequest);
+
+        System.out.println(query);
+
+        return this.mongoTemplate.find(query, Message.class);
     }
 
     /**
@@ -43,7 +65,7 @@ public class MessageDaoImpl implements MessageDao {
      */
     @Override
     public Message findMessageById(String id) {
-        return null;
+        return this.mongoTemplate.findById(new ObjectId(id), Message.class);
     }
 
     /**
@@ -57,7 +79,15 @@ public class MessageDaoImpl implements MessageDao {
      */
     @Override
     public UpdateResult updateMessageState(ObjectId id, Integer status) {
-        return null;
+        Query query = Query.query(Criteria.where("id").is(id));
+
+        Update update = Update.update("status", status);
+        if (status.intValue() == 1) {
+            update.set("send_date", new Date());
+        } else if (status.intValue() == 2) {
+            update.set("read_date", new Date());
+        }
+        return this.mongoTemplate.updateFirst(query, update, Message.class);
     }
 
     /**
@@ -70,7 +100,10 @@ public class MessageDaoImpl implements MessageDao {
      */
     @Override
     public Message saveMessage(Message message) {
-        return null;
+        message.setId(ObjectId.get());
+        message.setSendDate(new Date());
+        message.setStatus(1);
+        return this.mongoTemplate.save(message);
     }
 
     /**
@@ -83,6 +116,8 @@ public class MessageDaoImpl implements MessageDao {
      */
     @Override
     public DeleteResult deleteMessage(String id) {
-        return null;
+        Query query = Query.query(Criteria.where("id").is(id));
+        return this.mongoTemplate.remove(query, Message.class);
     }
+
 }
