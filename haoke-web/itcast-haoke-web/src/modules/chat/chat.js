@@ -39,31 +39,32 @@ class Chat extends React.Component {
   hideChat = () => {
     this.setState({isShow:false});
   }
-  componentDidMount = () => {
-    axios.post('/chats/list').then((data)=>{
-      this.setState({
-        list: data.data.list,
-        isLoading: true
-      })
-    })
-  }
+    componentDidMount = () => {
+        axios.get('http://127.0.0.1:18081/user?fromId=1001').then((data)=>{
+            this.setState({
+                list: data,
+                isLoading: true
+            })
+        })
+    }
+
   render() {
     const isLoading = this.state.isLoading;
     let list = null;
-    if (isLoading) {
-      list = this.state.list.map(item => {
-        return (
-          <li key={item.id} onClick={(e) => this.toChat(e,{item})}>
-            <div className="avarter">
-              <img src={config.imgBaseUrl + item.avatar} alt="avarter"/>
-              <span className="name">{item.username}</span>
-              <span className="info">{item.chat_msg}</span>
-              <span className="time">{item.ctime}</span>
-            </div>
-          </li>
-        )
-      })
-    }
+      if (isLoading) {
+          list = this.state.list.map(item => {
+              return (
+                  <li key={item.id} onClick={(e) => this.toChat(e,{item})}>
+                      <div className="avarter">
+                          <img src={item.avatar} alt="avarter"/>
+                          <span className="name">{item.username}</span>
+                          <span className="info">{item.chat_msg}</span>
+                          <span className="time">{item.ctime}</span>
+                      </div>
+                  </li>
+              )
+          })
+      }
     return(
       <div className='chat-container'>
         <div className="chat-title">聊天</div>

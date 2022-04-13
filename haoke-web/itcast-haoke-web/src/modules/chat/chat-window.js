@@ -14,7 +14,7 @@ class Chat extends React.Component {
       isLoading: false,
       msgContent: ''
     };
-    
+
   }
   guid() {
     function S4() {
@@ -27,56 +27,83 @@ class Chat extends React.Component {
       msgContent: event.target.value
     });
   }
-  sendMsg = () => {
-    let {to_user,from_user,avatar} = this.props.chatInfo;
-    let pdata = {
-      id: this.guid(),
-      from_user: from_user,
-      to_user: to_user,
-      avatar: avatar,
-      chat_msg: this.state.msgContent
-    }
-    let newList = [...this.state.infos];
-    newList.push(pdata);
-    this.setState({
-      infos: newList
-    })
 
-    this.state.client.emitEvent(IMEvent.MSG_TEXT_SEND,JSON.stringify(pdata));
-  }
-  componentDidMount = () => {
-    let {to_user,from_user} = this.props.chatInfo;
-    axios.post('/chats/info',{
-      to_user: to_user,
-      from_user: from_user
-    }).then(data=>{
-      this.setState({
-        infos: data.data.list,
-        isLoading: true,
-        client: handle(localStorage.getItem('uid'),(data)=>{
-          let newList = [...this.state.infos];
-          newList.push(JSON.parse(data.content));
-          this.setState({
+    sendMsg = () => {
+        let {to_user,from_user,avatar} = this.props.chatInfo;
+        let pdata = {
+            id: this.guid(),
+        // from_user: from_user,
+            toId: to_user,
+            from:{
+                id:this.state.fromId
+            },
+            // avatar: avatar,
+            msg: this.state.msgContent
+        }
+        let newList = [...this.state.infos];
+        newList.push(pdata);
+        this.setState({
             infos: newList
-          })
         })
-      });
-    })
-  }
+        this.state.client.emitEvent(IMEvent.MSG_TEXT_SEND,JSON.stringify(pdata));
+    }
+  // componentDidMount = () => {
+  //   let {to_user,from_user} = this.props.chatInfo;
+  //   axios.post('/chats/info',{
+  //     to_user: to_user,
+  //     from_user: from_user
+  //   }).then(data=>{
+  //     this.setState({
+  //       infos: data.data.list,
+  //       isLoading: true,
+  //       client: handle(localStorage.getItem('uid'),(data)=>{
+  //         let newList = [...this.state.infos];
+  //         newList.push(JSON.parse(data.content));
+  //         this.setState({
+  //           infos: newList
+  //         })
+  //       })
+  //     });
+  //   })
+  // }
+
+    componentDidMount = () => {
+        let {to_user,from_user} = this.props.chatInfo;
+        axios.get('http://127.0.0.1:18081/message',{params:{
+                toId: to_user,
+                fromId: from_user
+            }}).then(data=>{
+            this.setState({
+                infos: data,
+                isLoading: true,
+                fromId: from_user,
+                client: handle(from_user,(data)=>{
+                // client: handle(localStorage.getItem('uid'),(data)=>{
+                    let newList = [...this.state.infos];
+                    newList.push(JSON.parse(data));
+                    this.setState({
+                        infos: newList
+                    })
+                })
+            });
+        })
+    }
+
   render() {
     let {username} = this.props.chatInfo;
     let infoList = null;
-    if(this.state.isLoading) {
-      let currentUser = parseInt(localStorage.getItem('uid'),10);
-      infoList = this.state.infos.map(item=>{
-        return (
-          <li key={item.id} className={currentUser===item.from_user? 'chat-info-left':'chat-info-right'}>
-            <img src={config.imgBaseUrl + item.avatar} alt=""/>
-            <span>{item.chat_msg}</span>
-          </li>
-        )
-      })
-    }
+      if(this.state.isLoading) {
+// let currentUser = parseInt(localStorage.getItem('uid'),10);
+          let currentUser = parseInt(this.state.fromId,10);
+          infoList = this.state.infos.map(item=>{
+              return (
+                  <li key={item.id} className={currentUser===item.from.id? 'chat-info-right':'chat-info-left'}>
+                      <img src="https://gd1.alicdn.com/imgextra/i1/63986519/O1CN01PbT6Mz1y1kh5ZF7FN_!!63986519.jpg" alt=""/>
+                      <span>{item.msg}</span>
+                      </li>
+                      )
+                  })
+          }
     return(
       <div className='chat-window'>
         <div className="chat-window-title">
