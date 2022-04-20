@@ -24,7 +24,14 @@ public class ConsumerDemo {
         consumer.setNamesrvAddr("192.168.100.134:9876");
 
         // 订阅topic，接受此Topic下的所有消息
-        consumer.subscribe("haoke_im_topic", "*");
+//        consumer.subscribe("haoke_im_topic", "*");
+
+        // 其它订阅方式
+        // 完整匹配
+        consumer.subscribe("haoke_im_topic", "SEND_MSG");
+
+        // 或匹配
+        consumer.subscribe("haoke_im_topic", "SEND_MSG || SEND_MSG1");
 
         consumer.registerMessageListener(new MessageListenerConcurrently() {
             @Override
