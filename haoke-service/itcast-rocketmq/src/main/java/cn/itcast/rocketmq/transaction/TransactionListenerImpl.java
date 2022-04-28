@@ -35,7 +35,7 @@ public class TransactionListenerImpl implements TransactionListener {
             System.out.println("用户A转账减500元");
             Thread.sleep(500);
 
-//            System.out.println(1/0);
+            System.out.println(1/0);
 
             System.out.println("用户B账户加500元");
             Thread.sleep(800);
