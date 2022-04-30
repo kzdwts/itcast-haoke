@@ -25,6 +25,7 @@ public class ConsumerDemo {
 
         // 订阅topic，接受此Topic下的所有消息
 //        consumer.subscribe("haoke_im_topic", "*");
+        consumer.subscribe("my-test-topic", "*");
 
         // 其它订阅方式
         // 完整匹配
@@ -45,7 +46,13 @@ public class ConsumerDemo {
                     }
                 }
                 System.out.println("收到消息-》" + msgs);
-                return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+
+                if (msgs.get(0).getReconsumeTimes() >= 3) {
+                    // 重试3次后，不再进行重试
+                    return ConsumeConcurrentlyStatus.CONSUME_SUCCESS;
+                }
+
+                return ConsumeConcurrentlyStatus.RECONSUME_LATER;
             }
         });
 
