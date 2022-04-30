@@ -22,6 +22,9 @@ public class SyncProducer {
     public static void main(String[] args) throws MQClientException, UnsupportedEncodingException, MQBrokerException, RemotingException, InterruptedException {
         DefaultMQProducer producer = new DefaultMQProducer("test-group");
         producer.setNamesrvAddr("192.168.100.134:9876");
+
+        // 消息发送失败时，充实3次
+        producer.setRetryTimesWhenSendAsyncFailed(3);
         // 启动
         producer.start();
 
