@@ -6,7 +6,7 @@ spring:
   data:
     mongodb:
       uri: mongodb://192.168.100.134:27017/testdb
-  rocketmq:
-    name-server: 192.168.100.134:9876
-    producer:
-      group: haoke-im-websocket-group
+rocketmq:
+  name-server: 192.168.100.134:9876
+  producer:
+    group: haoke-im-websocket-group

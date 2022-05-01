@@ -5,6 +5,10 @@ import cn.itcast.haoke.im.pojo.Message;
 import cn.itcast.haoke.im.pojo.UserData;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import org.apache.rocketmq.spring.annotation.MessageModel;
+import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
+import org.apache.rocketmq.spring.core.RocketMQListener;
+import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
@@ -22,10 +26,18 @@ import java.util.Map;
  * @since 1.0.0
  */
 @Component
-public class MessageHandler extends TextWebSocketHandler {
+@RocketMQMessageListener(topic = "haoke-im-send-message-topic",
+        consumerGroup = "haoke-im-consumer",
+        messageModel = MessageModel.BROADCASTING,
+        selectorExpression = "SEND_MSG"
+)
+public class MessageHandler extends TextWebSocketHandler implements RocketMQListener<String> {
 
     @Autowired
     private MessageDao messageDao;
+
+    @Autowired
+    private RocketMQTemplate rocketMQTemplate;
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
@@ -66,6 +78,11 @@ public class MessageHandler extends TextWebSocketHandler {
             // 更新消息状态为已读
             this.messageDao.updateMessageState(sendMsg.getId(), 2);
         }
+
+    }
+
+    @Override
+    public void onMessage(String s) {
 
     }
 }
