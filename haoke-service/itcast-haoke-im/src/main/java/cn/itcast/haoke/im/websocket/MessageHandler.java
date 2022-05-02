@@ -82,7 +82,7 @@ public class MessageHandler extends TextWebSocketHandler implements RocketMQList
     }
 
     @Override
-    public void onMessage(String s) {
-
+    public void onMessage(String msg) {
+        System.out.println(msg);
     }
 }
