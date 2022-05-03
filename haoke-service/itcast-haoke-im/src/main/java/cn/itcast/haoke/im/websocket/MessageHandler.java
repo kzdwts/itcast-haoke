@@ -9,14 +9,17 @@ import org.apache.rocketmq.spring.annotation.MessageModel;
 import org.apache.rocketmq.spring.annotation.RocketMQMessageListener;
 import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
+import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 /**
  * 消息处理器
@@ -81,8 +84,29 @@ public class MessageHandler extends TextWebSocketHandler implements RocketMQList
 
     }
 
+    /**
+     * 接收到消息处理
+     *
+     * @param msg {@link String} 消息内容
+     * @author Kang Yong
+     * @date 2022/5/3
+     */
     @Override
     public void onMessage(String msg) {
         System.out.println(msg);
+
+        try {
+            JsonNode jsonNode = MAPPER.readTree(msg);
+            long toId = jsonNode.get("to").get("id").longValue();
+            // 判断to用户是否在线
+            WebSocketSession toSession = SESSION.get(toId);
+            if (Objects.nonNull(toSession) && toSession.isOpen()) {
+                toSession.sendMessage(new TextMessage(msg));
+                // 更新消息状态为已读
+                this.messageDao.updateMessageState(new ObjectId(jsonNode.get("id").asText()), 2);
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
