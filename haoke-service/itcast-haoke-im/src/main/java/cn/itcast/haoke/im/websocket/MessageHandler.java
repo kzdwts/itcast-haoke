@@ -11,6 +11,7 @@ import org.apache.rocketmq.spring.core.RocketMQListener;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.bson.types.ObjectId;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.stereotype.Component;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketSession;
@@ -71,6 +72,7 @@ public class MessageHandler extends TextWebSocketHandler implements RocketMQList
 
         // 将消息保存到MongoDB
         sendMsg = this.messageDao.saveMessage(sendMsg);
+        String msgStr = MAPPER.writeValueAsString(sendMsg);
 
         // 判断to用户是否在线
         WebSocketSession toSession = SESSION.get(toId);
@@ -80,6 +82,11 @@ public class MessageHandler extends TextWebSocketHandler implements RocketMQList
 
             // 更新消息状态为已读
             this.messageDao.updateMessageState(sendMsg.getId(), 2);
+        } else {
+            // 用户不在线，或者不在当前jvm中，发送消息到RocketMQ
+            org.springframework.messaging.Message<String> mqMessage = MessageBuilder.withPayload(msgStr).build();
+            // topic:tags 设置主题和标签
+            this.rocketMQTemplate.send("haoke-im-send-message-topic:SEND_MSG", mqMessage);
         }
 
     }
