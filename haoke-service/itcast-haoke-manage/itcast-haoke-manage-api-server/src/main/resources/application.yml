@@ -4,8 +4,7 @@ server:
 spring:
   application:
     name: itcast-haoke-manage-api-server
-
-# redos集群配置
+  # redis集群配置
   redis:
     jedis:
       pool:
@@ -16,6 +15,9 @@ spring:
     cluster:
       nodes: 192.168.100.134:6379,192.168.100.134:6380,192.168.100.134:6381
       max-redirects: 5
+  data:
+    mongodb:
+      uri: mongodb://192.168.100.134:27017/testdb
 
 # dubbo 配置
 dubbo:

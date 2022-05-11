@@ -51,3 +51,12 @@ type IndexAdResult{
 type IndexAdResultData{
     original:String
 }
+
+type MapHouseDataResult{
+    list:[MapHouseXY]
+}
+
+type MapHouseXY{
+    x:Float
+    y:Float
+}
