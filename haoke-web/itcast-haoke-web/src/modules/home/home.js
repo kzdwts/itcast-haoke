@@ -76,7 +76,7 @@ class Home extends React.Component {
         // axios.post('/homes/menu').then((data)=>{
         //     resolve(data.data.list);
         // });
-        axios.get('http://127.0.0.1:18080/mock/indexMenu').then((data)=>{
+        axios.get('http://127.0.0.1:18080/mock/index/menu').then((data)=>{
             resolve(data.data.list);
         });
     })
@@ -161,11 +161,11 @@ class Home extends React.Component {
     const swipeData = this.state.swipeData;
     let swipe = null;
     if(swipeLoading) {
-      swipe = <ImageGallery 
-                preventDefaultTouchmoveEvent={true} 
-                autoPlay={true} 
-                disableSwipe={false} 
-                showThumbnails={false} 
+      swipe = <ImageGallery
+                preventDefaultTouchmoveEvent={true}
+                autoPlay={true}
+                disableSwipe={false}
+                showThumbnails={false}
                 items={swipeData} />
     }
     // 菜单渲染
